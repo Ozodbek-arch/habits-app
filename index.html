@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Laylo Kids - Online Do'kon</title>
+    <title>Laylo Kids - Web App</title>
     <!-- Telegram Web App Script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Google Fonts & Tailwind CSS -->
+    <!-- Tailwind CSS & Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -16,17 +16,18 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            light: '#FFF0F5', /* Lavender Blush */
-                            pink: '#FFB7C5',  /* Sakura Pink */
-                            deep: '#800020',  /* Burgundy */
-                            gold: '#D4AF37',  /* Metallic Gold */
-                            dark: '#2C1B1F'   /* Very Dark Purple/Brown */
+                        laylo: {
+                            bg: '#FFF5F7',       /* Yumshoq och pushti fon */
+                            dark: '#4A1521',     /* To'q marvarid/burgundi */
+                            gold: '#D4AF37',     /* Oltinrang */
+                            goldLight: '#F3E5AB',/* Och oltinrang */
+                            accent: '#E07A8F',   /* Yorqinroq pushti */
+                            cardBg: '#FFFFFF'
                         }
                     },
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
                     }
                 }
             }
@@ -35,286 +36,301 @@
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #FFF0F5;
-            background-image: radial-gradient(circle at 100% 150%, #FFB7C5 24%, #FFF0F5 25%, #FFF0F5 28%, #FFB7C5 29%, #FFF0F5 36%, #FFF0F5 40%, #FFB7C5 41%, #FFF0F5 42%, #FFF0F5 48%, #FFB7C5 49%, #FFF0F5 50%);
-            background-size: 40px 40px;
-            background-opacity: 0.15;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF5F7;
+            /* Elegant ayollarga xos naqsh (Floral Lace Pattern CSS) */
+            background-image: 
+                radial-gradient(circle at 100% 150%, #FFE3E8 24%, #FFF5F7 25%, #FFF5F7 28%, #FFE3E8 29%, #FFF5F7 36%, #FFF5F7 40%, #FFE3E8 41%, #FFF5F7 42%, #FFF5F7 48%, #FFE3E8 49%, #FFF5F7 50%),
+                radial-gradient(circle at 0% 100%, #FFE3E8 24%, #FFF5F7 25%, #FFF5F7 28%, #FFE3E8 29%, #FFF5F7 36%, #FFF5F7 40%, #FFE3E8 41%, #FFF5F7 42%, #FFF5F7 48%, #FFE3E8 49%, #FFF5F7 50%);
+            background-size: 30px 30px;
+            -webkit-user-select: none;
+            user-select: none;
         }
-        /* Elegant floral element */
-        .floral-header {
-            background: linear-gradient(135deg, #800020 0%, #4A0010 100%);
+
+        /* Oltinrang ingichka milliy/zamonaviy naqshlar chegarasi */
+        .gold-border {
+            border: 1px solid;
+            border-image: linear-gradient(to right, #D4AF37, #F3E5AB, #D4AF37) 1;
+        }
+
+        /* Header uchun maxsus hashamatli fon */
+        .premium-header {
+            background: radial-gradient(circle, #5c1b29 0%, #300a12 100%);
             position: relative;
-            overflow: hidden;
         }
-        .floral-header::before {
+        
+        /* Sharqona nafis doira naqshlar */
+        .premium-header::after {
             content: "";
             position: absolute;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
-            top: -50px;
-            right: -50px;
-            border-radius: 50%;
+            inset: 0;
+            opacity: 0.08;
+            background-image: radial-gradient(circle at 50% 50%, #D4AF37 10%, transparent 20%),
+                              radial-gradient(circle at 0 0, #D4AF37 5%, transparent 10%);
+            background-size: 20px 20px;
         }
-        /* Custom scrollbar */
+
+        /* Juda ixcham scrollbar */
         ::-webkit-scrollbar {
-            width: 4px;
+            height: 3px;
+            width: 3px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #800020;
+            background: #D4AF37;
             border-radius: 10px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
-<body class="text-brand-dark pb-24">
+<body class="text-laylo-dark pb-20 text-[13px]">
 
     <!-- HEADER -->
-    <header class="floral-header text-white px-4 py-6 rounded-b-[2rem] shadow-lg relative">
-        <div class="flex justify-between items-center">
+    <header class="premium-header text-white px-3 py-3 rounded-b-[1.5rem] shadow-md relative overflow-hidden">
+        <div class="flex justify-between items-center relative z-10">
             <div>
-                <h1 class="font-serif text-3xl font-bold tracking-wider text-brand-gold flex items-center gap-2">
-                    🌸 Laylo Kids
+                <!-- Oltinrang yaltiroq brend nomi -->
+                <h1 class="font-serif text-lg font-bold tracking-wide text-laylo-gold flex items-center gap-1">
+                    ✨ LAYLO KIDS
                 </h1>
-                <p id="app-subtitle" class="text-xs text-pink-200 mt-1">Ayollar va bolalar olami</p>
+                <p id="app-subtitle" class="text-[9px] text-pink-200 tracking-wider">Ayollar va bolalar olami</p>
             </div>
             <!-- Language Selector -->
-            <div class="relative">
-                <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-brand-deep text-brand-gold border border-brand-gold rounded-full px-2 py-1 text-xs outline-none font-bold">
-                    <option value="uz">UZ</option>
-                    <option value="ru">RU</option>
-                    <option value="en">EN</option>
-                </select>
-            </div>
+            <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-laylo-dark text-laylo-gold border border-laylo-gold/50 rounded-full px-2 py-0.5 text-[10px] outline-none font-semibold">
+                <option value="uz">UZ</option>
+                <option value="ru">RU</option>
+                <option value="en">EN</option>
+            </select>
         </div>
+        <!-- Header pastidagi nafis oltin chiziq -->
+        <div class="h-[1px] w-4/5 mx-auto bg-gradient-to-r from-transparent via-laylo-gold to-transparent mt-2"></div>
     </header>
 
-    <!-- CONTENT VIEWS -->
-    <main class="container mx-auto px-4 mt-6">
+    <!-- MAIN VIEWPORT -->
+    <main class="px-3 mt-3">
 
         <!-- 1. CATALOG / SHOP VIEW -->
         <section id="view-shop" class="view-section">
-            <div class="flex justify-between items-center mb-4">
-                <h2 id="title-catalog" class="font-serif text-xl font-bold text-brand-deep border-b-2 border-brand-gold pb-1">Katalog</h2>
-                <span id="cart-badge-container" onclick="openCart()" class="relative cursor-pointer bg-brand-deep text-white px-3 py-1.5 rounded-full flex items-center gap-2 shadow-md">
-                    <i class="fa-solid fa-basket-shopping text-brand-gold"></i>
-                    <span id="cart-total-price" class="text-xs font-semibold">0 so'm</span>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-gold text-brand-dark text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow border-2 border-brand-light">0</span>
+            <div class="flex justify-between items-center mb-2">
+                <h2 id="title-catalog" class="font-serif text-xs font-bold text-laylo-dark uppercase tracking-wider flex items-center gap-1">
+                    ⚜️ <span id="lbl-cat-header">Katalog</span>
+                </h2>
+                <!-- Kichikroq va nozik savat tugmasi -->
+                <span id="cart-badge-container" onclick="openCart()" class="cursor-pointer bg-laylo-dark text-white px-2 py-1 rounded-full flex items-center gap-1.5 shadow border border-laylo-gold/30">
+                    <i class="fa-solid fa-bag-shopping text-[10px] text-laylo-gold animate-bounce"></i>
+                    <span id="cart-total-price" class="text-[9px] font-semibold text-laylo-gold">0 so'm</span>
+                    <span id="cart-count" class="bg-laylo-gold text-laylo-dark text-[8px] font-bold w-4 h-4 flex items-center justify-center rounded-full">0</span>
                 </span>
             </div>
             
-            <!-- Category Filter -->
-            <div class="flex gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar">
-                <button onclick="filterCategory('all')" class="category-btn active bg-brand-deep text-white px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition shadow-sm" id="cat-all">Hammasi</button>
-                <button onclick="filterCategory('women')" class="category-btn bg-white text-brand-deep border border-brand-pink/50 px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition" id="cat-women">Ayollar uchun</button>
-                <button onclick="filterCategory('kids')" class="category-btn bg-white text-brand-deep border border-brand-pink/50 px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition" id="cat-kids">Yosh bolalar</button>
+            <!-- Ixcham Kategoriya tugmalari -->
+            <div class="flex gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar">
+                <button onclick="filterCategory('all')" class="category-btn active bg-laylo-dark text-white px-3 py-1 rounded-full text-[10px] font-medium shrink-0 transition" id="cat-all">Hammasi</button>
+                <button onclick="filterCategory('women')" class="category-btn bg-white text-laylo-dark border border-laylo-accent/30 px-3 py-1 rounded-full text-[10px] font-medium shrink-0 transition" id="cat-women">Ayollar uchun</button>
+                <button onclick="filterCategory('kids')" class="category-btn bg-white text-laylo-dark border border-laylo-accent/30 px-3 py-1 rounded-full text-[10px] font-medium shrink-0 transition" id="cat-kids">Yosh bolalar</button>
             </div>
 
-            <!-- Products Grid -->
-            <div id="products-grid" class="grid grid-cols-2 gap-4">
-                <!-- Dinamik ravishda yuklanadi -->
+            <!-- Products Grid (2 tadan ixcham qator qilib chiqarish) -->
+            <div id="products-grid" class="grid grid-cols-2 gap-2">
+                <!-- Mahsulotlar dinamik ravishda tushadi -->
             </div>
         </section>
 
-        <!-- 2. CART MODAL/VIEW -->
+        <!-- 2. SAVAT VIEW -->
         <section id="view-cart" class="view-section hidden">
-            <h2 id="title-cart" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Sizning savatingiz</h2>
-            <div id="cart-items" class="space-y-3 mb-6">
-                <!-- Savat darslari yuklanadi -->
+            <h2 id="title-cart" class="font-serif text-sm font-bold text-laylo-dark border-b border-laylo-gold/30 pb-1 mb-2">Sizning savatingiz</h2>
+            <div id="cart-items" class="space-y-1.5 mb-3">
+                <!-- Savat tarkibi -->
             </div>
-            <div class="bg-white p-4 rounded-2xl shadow-md border border-brand-pink/30 mb-6">
-                <div class="flex justify-between font-bold text-brand-deep mb-2">
-                    <span id="lbl-total">Jami summa:</span>
-                    <span id="cart-summary-total">0 so'm</span>
-                </div>
+            <div class="bg-white p-2 rounded-xl shadow-sm border border-laylo-accent/20 mb-3 flex justify-between items-center text-xs">
+                <span id="lbl-total" class="font-semibold text-gray-500">Jami summa:</span>
+                <span id="cart-summary-total" class="font-bold text-laylo-dark">0 so'm</span>
             </div>
-            <button onclick="checkoutOrder()" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-emerald-700 transition flex justify-center items-center gap-2">
-                <i class="fa-solid fa-circle-check"></i> <span id="btn-checkout">Buyurtma berish (Telegram orqali)</span>
+            <button onclick="checkoutOrder()" class="w-full bg-emerald-600 text-white text-[11px] font-bold py-2 rounded-lg shadow flex justify-center items-center gap-1 hover:bg-emerald-700 transition">
+                <i class="fa-solid fa-paper-plane"></i> <span id="btn-checkout">Telegram orqali buyurtma berish</span>
             </button>
         </section>
 
-        <!-- 3. WAREHOUSE (OMBORXONA) VIEW -->
+        <!-- 3. OMBORXONA VIEW -->
         <section id="view-warehouse" class="view-section hidden">
-            <h2 id="title-warehouse" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Omborxona nazorati</h2>
+            <h2 id="title-warehouse" class="font-serif text-sm font-bold text-laylo-dark border-b border-laylo-gold/30 pb-1 mb-2">Omborxona boshqaruvi</h2>
             
-            <!-- Add Product Form -->
-            <div class="bg-white p-4 rounded-2xl shadow-md border border-brand-pink/30 mb-6">
-                <h3 id="form-add-title" class="font-semibold text-brand-deep mb-3 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle text-brand-gold"></i> Yangi mahsulot qo'shish
+            <!-- Yangi mahsulot formasi -->
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-laylo-accent/20 mb-3">
+                <h3 id="form-add-title" class="font-bold text-xs text-laylo-dark mb-2 flex items-center gap-1">
+                    ✨ Yangi mahsulot qo'shish
                 </h3>
-                <div class="space-y-3">
-                    <input type="text" id="prod-name-uz" placeholder="Mahsulot nomi (O'zbekcha)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
-                    <input type="text" id="prod-name-ru" placeholder="Mahsulot nomi (Русский)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
-                    <input type="text" id="prod-name-en" placeholder="Mahsulot nomi (English)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                <div class="space-y-2 text-[11px]">
+                    <input type="text" id="prod-name-uz" placeholder="Mahsulot nomi (O'zbekcha)" class="w-full p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
+                    <input type="text" id="prod-name-ru" placeholder="Mahsulot nomi (Русский)" class="w-full p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
+                    <input type="text" id="prod-name-en" placeholder="Mahsulot nomi (English)" class="w-full p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
                     
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="number" id="prod-price" placeholder="Narxi (so'm)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
-                        <input type="number" id="prod-qty" placeholder="Miqdori (dona)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                        <input type="number" id="prod-price" placeholder="Narxi (so'm)" class="p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
+                        <input type="number" id="prod-qty" placeholder="Miqdori (dona)" class="p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
-                        <select id="prod-category" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep bg-white">
-                            <option value="women">Ayollar</option>
-                            <option value="kids">Yosh bolalar</option>
+                        <select id="prod-category" class="p-2 border border-pink-100 rounded-md bg-white outline-none">
+                            <option value="women">Ayollar kiyimi</option>
+                            <option value="kids">Yosh bolalar kiyimi</option>
                         </select>
-                        <input type="text" id="prod-img" placeholder="Rasm URL (ixtiyoriy)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                        <input type="text" id="prod-img" placeholder="Rasm havolasi (ixtiyoriy)" class="p-2 border border-pink-100 rounded-md outline-none focus:border-laylo-accent">
                     </div>
-                    <button onclick="addNewProduct()" class="w-full bg-brand-deep text-brand-gold font-bold py-2.5 rounded-lg text-xs shadow-md flex justify-center items-center gap-2">
-                        <i class="fa-solid fa-arrow-down-long"></i> <span id="btn-save-prod">Saqlash</span>
+                    <button onclick="addNewProduct()" class="w-full bg-laylo-dark text-laylo-gold font-bold py-2 rounded-lg text-xs shadow flex justify-center items-center gap-1">
+                        <i class="fa-solid fa-save"></i> <span id="btn-save-prod">Saqlash</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Admin Product List -->
-            <div class="space-y-3" id="admin-product-list">
-                <!-- Omborxonadagi mahsulotlar boshqaruvi -->
+            <!-- Ombor ro'yxati -->
+            <div class="space-y-1.5" id="admin-product-list">
+                <!-- Mahsulot qoldiqlari -->
             </div>
         </section>
 
-        <!-- 4. STATISTICS VIEW -->
+        <!-- 4. STATISTIKA VIEW -->
         <section id="view-stats" class="view-section hidden">
-            <h2 id="title-stats" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Moliyaviy Statistika</h2>
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-emerald-500">
-                    <p id="lbl-total-sales" class="text-xs text-gray-500 uppercase font-semibold">Umumiy Savdo</p>
-                    <p id="stat-total-sales" class="text-lg font-bold text-emerald-600 mt-1">0 so'm</p>
+            <h2 id="title-stats" class="font-serif text-sm font-bold text-laylo-dark border-b border-laylo-gold/30 pb-1 mb-2">Tahlil va Statistika</h2>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-[11px]">
+                <div class="bg-white p-2 rounded-xl shadow border-l-2 border-emerald-500">
+                    <p id="lbl-total-sales" class="text-[9px] text-gray-400 font-bold uppercase">Savdo</p>
+                    <p id="stat-total-sales" class="text-xs font-bold text-emerald-600 mt-0.5">0 so'm</p>
                 </div>
-                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-blue-500">
-                    <p id="lbl-total-orders" class="text-xs text-gray-500 uppercase font-semibold">Buyurtmalar</p>
-                    <p id="stat-total-orders" class="text-xl font-bold text-blue-600 mt-1">0 ta</p>
+                <div class="bg-white p-2 rounded-xl shadow border-l-2 border-blue-500">
+                    <p id="lbl-total-orders" class="text-[9px] text-gray-400 font-bold uppercase">Buyurtmalar</p>
+                    <p id="stat-total-orders" class="text-xs font-bold text-blue-600 mt-0.5">0 ta</p>
                 </div>
-                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-brand-gold col-span-2">
-                    <p id="lbl-warehouse-value" class="text-xs text-gray-500 uppercase font-semibold">Ombordagi tovarlar qiymati</p>
-                    <p id="stat-warehouse-value" class="text-lg font-bold text-brand-dark mt-1">0 so'm</p>
+                <div class="bg-white p-2 rounded-xl shadow border-l-2 border-laylo-gold col-span-2">
+                    <p id="lbl-warehouse-value" class="text-[9px] text-gray-400 font-bold uppercase">Ombor umumiy qiymati</p>
+                    <p id="stat-warehouse-value" class="text-xs font-bold text-laylo-dark mt-0.5">0 so'm</p>
                 </div>
             </div>
 
-            <!-- Recent Orders Log -->
-            <div class="bg-white p-4 rounded-2xl shadow border border-brand-pink/30">
-                <h3 id="title-order-history" class="font-bold text-brand-deep mb-3 text-sm">Buyurtmalar tarixi</h3>
-                <div id="order-history-list" class="space-y-3 max-h-60 overflow-y-auto">
-                    <!-- Tarixiy sotuvlar -->
+            <div class="bg-white p-3 rounded-xl shadow border border-laylo-accent/20">
+                <h3 id="title-order-history" class="font-bold text-xs text-laylo-dark mb-2">Tarix</h3>
+                <div id="order-history-list" class="space-y-1.5 max-h-48 overflow-y-auto">
+                    <!-- Buyurtmalar loglari -->
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- NAVIGATION BAR -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-brand-pink/30 py-2 px-4 flex justify-around items-center shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-2xl z-50">
-        <button onclick="switchView('shop')" id="nav-shop" class="flex flex-col items-center text-brand-deep">
-            <i class="fa-solid fa-store text-lg"></i>
-            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_shop">Do'kon</span>
+    <!-- CHIQIB TURMAYDIGAN YUQORI DIZAYNDAGI NAV BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-laylo-accent/20 py-1 px-2 flex justify-around items-center shadow-[0_-3px_10px_rgba(0,0,0,0.05)] rounded-t-xl z-50">
+        <button onclick="switchView('shop')" id="nav-shop" class="flex flex-col items-center text-laylo-dark">
+            <i class="fa-solid fa-house-chimney text-xs"></i>
+            <span class="text-[8px] mt-0.5 font-bold nav-label" data-key="nav_shop">Do'kon</span>
         </button>
         <button onclick="switchView('cart')" id="nav-cart" class="flex flex-col items-center text-gray-400">
             <div class="relative">
-                <i class="fa-solid fa-basket-shopping text-lg"></i>
-                <span id="nav-cart-count" class="absolute -top-1.5 -right-2 bg-brand-gold text-brand-dark text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                <i class="fa-solid fa-bag-shopping text-xs"></i>
+                <span id="nav-cart-count" class="absolute -top-1 -right-2 bg-laylo-gold text-laylo-dark text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center">0</span>
             </div>
-            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_cart">Savat</span>
+            <span class="text-[8px] mt-0.5 font-bold nav-label" data-key="nav_cart">Savat</span>
         </button>
         <button onclick="switchView('warehouse')" id="nav-warehouse" class="flex flex-col items-center text-gray-400">
-            <i class="fa-solid fa-warehouse text-lg"></i>
-            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_warehouse">Ombor</span>
+            <i class="fa-solid fa-boxes-stacked text-xs"></i>
+            <span class="text-[8px] mt-0.5 font-bold nav-label" data-key="nav_warehouse">Ombor</span>
         </button>
         <button onclick="switchView('stats')" id="nav-stats" class="flex flex-col items-center text-gray-400">
-            <i class="fa-solid fa-chart-line text-lg"></i>
-            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_stats">Statistika</span>
+            <i class="fa-solid fa-chart-pie text-xs"></i>
+            <span class="text-[8px] mt-0.5 font-bold nav-label" data-key="nav_stats">Statistika</span>
         </button>
     </nav>
 
-    <!-- LOGICAL SCRIPTS -->
+    <!-- JAVASCRIPT LOGIKA -->
     <script>
-        // Telegram WebApp init
+        // Telegram WebApp interfeysi sozlamasi
         const tg = window.Telegram ? window.Telegram.WebApp : null;
         if (tg) {
             tg.ready();
             tg.expand();
         }
 
-        // Tillar lug'ati
         const translations = {
             uz: {
                 subtitle: "Ayollar va bolalar olami",
                 catalog: "Katalog",
                 all: "Hammasi",
-                women: "Ayollar uchun",
+                women: "Ayollar",
                 kids: "Yosh bolalar",
-                cart: "Sizning savatingiz",
+                cart: "Savatingiz",
                 total: "Jami summa:",
-                checkout: "Buyurtma berish (Telegram)",
-                warehouse: "Omborxona nazorati",
-                add_title: "Yangi mahsulot qo'shish",
+                checkout: "Telegram orqali jo'natish",
+                warehouse: "Omborxona",
+                add_title: "Yangi mahsulot",
                 save: "Saqlash",
-                stats: "Moliyaviy Statistika",
-                total_sales: "Umumiy Savdo",
+                stats: "Tahlillar",
+                total_sales: "Jami Savdo",
                 total_orders: "Buyurtmalar",
-                warehouse_value: "Ombordagi tovarlar qiymati",
-                order_history: "Buyurtmalar tarixi",
+                warehouse_value: "Ombor qiymati",
+                order_history: "Sotuvlar tarixi",
                 nav_shop: "Do'kon",
                 nav_cart: "Savat",
                 nav_warehouse: "Ombor",
                 nav_stats: "Statistika",
-                added: "Savatga qo'shildi",
-                out_stock: "Omborda yetarli emas!"
+                added: "Qo'shildi!",
+                out_stock: "Omborda qolmagan!"
             },
             ru: {
                 subtitle: "Мир женщин и детей",
                 catalog: "Каталог",
                 all: "Все",
                 women: "Для женщин",
-                kids: "Для детей",
-                cart: "Ваша корзина",
-                total: "Итоговая сумма:",
-                checkout: "Оформить заказ (через Telegram)",
-                warehouse: "Управление складом",
-                add_title: "Добавить новый товар",
+                kids: "Детям",
+                cart: "Корзина",
+                total: "Итого:",
+                checkout: "Оформить в Telegram",
+                warehouse: "Складской учет",
+                add_title: "Новый товар",
                 save: "Сохранить",
-                stats: "Финансовая статистика",
+                stats: "Статистика",
                 total_sales: "Общие продажи",
                 total_orders: "Заказы",
-                warehouse_value: "Стоимость товаров на складе",
-                order_history: "История заказов",
+                warehouse_value: "Стоимость склада",
+                order_history: "История продаж",
                 nav_shop: "Магазин",
                 nav_cart: "Корзина",
                 nav_warehouse: "Склад",
-                nav_stats: "Статистика",
-                added: "Добавлено в корзину",
-                out_stock: "Недостаточно на складе!"
+                nav_stats: "Аналитика",
+                added: "Добавлено!",
+                out_stock: "Нет в наличии!"
             },
             en: {
-                subtitle: "Women and Kids World",
+                subtitle: "Women and Kids Boutique",
                 catalog: "Catalog",
                 all: "All",
-                women: "For Women",
-                kids: "Kids Wear",
-                cart: "Your Cart",
-                total: "Total Price:",
-                checkout: "Place Order (via Telegram)",
-                warehouse: "Warehouse Control",
-                add_title: "Add New Product",
-                save: "Save Product",
-                stats: "Financial Statistics",
+                women: "Women",
+                kids: "Kids",
+                cart: "My Cart",
+                total: "Total:",
+                checkout: "Checkout via Telegram",
+                warehouse: "Inventory",
+                add_title: "Add Product",
+                save: "Save",
+                stats: "Analytics",
                 total_sales: "Total Sales",
                 total_orders: "Orders",
-                warehouse_value: "Warehouse Inventory Value",
-                order_history: "Order History",
+                warehouse_value: "Stock Value",
+                order_history: "Sales History",
                 nav_shop: "Shop",
                 nav_cart: "Cart",
                 nav_warehouse: "Warehouse",
                 nav_stats: "Stats",
-                added: "Added to cart",
-                out_stock: "Not enough in stock!"
+                added: "Added!",
+                out_stock: "Out of stock!"
             }
         };
 
         let currentLang = 'uz';
 
-        // Boshlang'ich Mahsulotlar (Local Storage bo'sh bo'lsa)
         const defaultProducts = [
-            { id: 1, name: { uz: "Nafis atlas ko'ylak", ru: "Элегантное платье из атласа", en: "Elegant Atlas Dress" }, price: 350000, qty: 15, category: "women", img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300" },
-            { id: 2, name: { uz: "Bolalar trikotaj kiyimi", ru: "Детский трикотажный комплект", en: "Kids Knitwear Set" }, price: 120000, qty: 25, category: "kids", img: "https://images.unsplash.com/photo-1519704943960-ab38fa2c4621?w=300" },
-            { id: 3, name: { uz: "Ayollar bahoriy kamzoli", ru: "Женский весенний кардиган", en: "Women Spring Cardigan" }, price: 420000, qty: 8, category: "women", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300" },
-            { id: 4, name: { uz: "Mitti bejirim qizlar ko'ylagi", ru: "Милое платье для девочек", en: "Cute Girls Dress" }, price: 180000, qty: 12, category: "kids", img: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=300" }
+            { id: 1, name: { uz: "Zebolik atlas libos", ru: "Шёлковое атласное платье", en: "Elegant Silk Dress" }, price: 320000, qty: 10, category: "women", img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200" },
+            { id: 2, name: { uz: "Qizaloqlar uchun bayram ko'ylagi", ru: "Праздничное детское платье", en: "Girls Party Dress" }, price: 185000, qty: 12, category: "kids", img: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=200" },
+            { id: 3, name: { uz: "Mayin trikotaj to'plam", ru: "Детский трикотажный костюм", en: "Kids Soft Knitwear" }, price: 145000, qty: 8, category: "kids", img: "https://images.unsplash.com/photo-1519704943960-ab38fa2c4621?w=200" },
+            { id: 4, name: { uz: "Nafis bahoriy nimcha", ru: "Элегантный весенний жилет", en: "Elegant Spring Vest" }, price: 290000, qty: 6, category: "women", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200" }
         ];
 
         let products = JSON.parse(localStorage.getItem('laylo_products')) || defaultProducts;
@@ -326,11 +342,10 @@
             localStorage.setItem('laylo_stats', JSON.stringify(stats));
         }
 
-        // TILLARNI ALMASHTIRISH
         function changeLanguage(lang) {
             currentLang = lang;
             document.getElementById('app-subtitle').innerText = translations[lang].subtitle;
-            document.getElementById('title-catalog').innerText = translations[lang].catalog;
+            document.getElementById('lbl-cat-header').innerText = translations[lang].catalog;
             document.getElementById('cat-all').innerText = translations[lang].all;
             document.getElementById('cat-women').innerText = translations[lang].women;
             document.getElementById('cat-kids').innerText = translations[lang].kids;
@@ -346,7 +361,6 @@
             document.getElementById('lbl-warehouse-value').innerText = translations[lang].warehouse_value;
             document.getElementById('title-order-history').innerText = translations[lang].order_history;
 
-            // Nav bar labels
             document.querySelectorAll('.nav-label').forEach(label => {
                 const key = label.getAttribute('data-key');
                 label.innerText = translations[lang][key];
@@ -358,68 +372,63 @@
             renderCart();
         }
 
-        // VIEW ALMASHTIRUVCHI
         function switchView(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
 
-            // Nav tugmalari rangini yangilash
             const navs = ['shop', 'cart', 'warehouse', 'stats'];
             navs.forEach(nav => {
                 const navBtn = document.getElementById(`nav-${nav}`);
                 if (nav === viewId) {
                     navBtn.classList.remove('text-gray-400');
-                    navBtn.classList.add('text-brand-deep');
+                    navBtn.classList.add('text-laylo-dark');
                 } else {
-                    navBtn.classList.remove('text-brand-deep');
+                    navBtn.classList.remove('text-laylo-dark');
                     navBtn.classList.add('text-gray-400');
                 }
             });
         }
 
-        // MAHSULOTLARNI KATALOGGA CHIQARISH
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
-
             const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
 
             filtered.forEach(p => {
                 const isOutOfStock = p.qty <= 0;
                 grid.innerHTML += `
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-brand-pink/20 flex flex-col justify-between">
-                        <img src="${p.img || 'https://via.placeholder.com/150?text=Laylo+Kids'}" class="w-full h-36 object-cover" alt="">
-                        <div class="p-3 flex flex-col flex-grow justify-between">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-laylo-accent/10 flex flex-col justify-between">
+                        <div class="relative">
+                            <img src="${p.img || 'https://via.placeholder.com/150?text=Laylo+Kids'}" class="w-full h-24 object-cover" alt="">
+                            ${isOutOfStock ? `<span class="absolute top-1 left-1 bg-red-600 text-white text-[8px] px-1 py-0.2 rounded font-bold">Yo'q</span>` : ''}
+                        </div>
+                        <div class="p-2 flex flex-col flex-grow justify-between">
                             <div>
-                                <h3 class="font-medium text-xs text-brand-dark line-clamp-2">${p.name[currentLang]}</h3>
-                                <div class="flex justify-between items-center mt-2">
-                                    <span class="text-[10px] text-gray-500">${p.qty} dona bor</span>
+                                <h3 class="font-medium text-[10px] text-laylo-dark line-clamp-1">${p.name[currentLang]}</h3>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-[9px] text-gray-400">${p.qty} dona</span>
+                                    <span class="font-bold text-laylo-dark text-[10px]">${p.price.toLocaleString()} so'm</span>
                                 </div>
                             </div>
-                            <div class="mt-2">
-                                <span class="font-bold text-brand-deep text-xs block">${p.price.toLocaleString()} so'm</span>
-                                <button onclick="addToCart(${p.id})" ${isOutOfStock ? 'disabled' : ''} class="w-full mt-2 ${isOutOfStock ? 'bg-gray-300' : 'bg-brand-pink hover:bg-brand-deep hover:text-white'} text-brand-dark font-bold text-[10px] py-1.5 rounded-lg transition">
-                                    ${isOutOfStock ? 'Xarid qilib bo\'lingan' : '<i class="fa-solid fa-cart-plus"></i> ' + translations[currentLang].nav_cart}
-                                </button>
-                            </div>
+                            <button onclick="addToCart(${p.id})" ${isOutOfStock ? 'disabled' : ''} class="w-full mt-2 ${isOutOfStock ? 'bg-gray-200 text-gray-400' : 'bg-laylo-accent hover:bg-laylo-dark text-white hover:text-white'} font-bold text-[9px] py-1 rounded-md transition shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // FILTRLASH
         function filterCategory(cat) {
             document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-deep', 'text-white', 'active');
-                btn.classList.add('bg-white', 'text-brand-deep', 'border', 'border-brand-pink/50');
+                btn.classList.remove('bg-laylo-dark', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-laylo-dark', 'border', 'border-laylo-accent/30');
             });
-            event.currentTarget.classList.remove('bg-white', 'text-brand-deep', 'border', 'border-brand-pink/50');
-            event.currentTarget.classList.add('bg-brand-deep', 'text-white', 'active');
+            event.currentTarget.classList.remove('bg-white', 'text-laylo-dark', 'border', 'border-laylo-accent/30');
+            event.currentTarget.classList.add('bg-laylo-dark', 'text-white', 'active');
             renderProducts(cat);
         }
 
-        // SAVATGA QO'SHISH
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             const cartItem = cart.find(item => item.id === id);
@@ -444,7 +453,6 @@
             renderCart();
         }
 
-        // SAVATNI YANGILASH
         function renderCart() {
             const cartItemsContainer = document.getElementById('cart-items');
             cartItemsContainer.innerHTML = '';
@@ -459,18 +467,18 @@
                 count += item.qty;
 
                 cartItemsContainer.innerHTML += `
-                    <div class="flex items-center justify-between bg-white p-3 rounded-xl shadow-sm border border-brand-pink/20">
-                        <div class="flex items-center gap-3">
-                            <img src="${prod.img}" class="w-12 h-12 object-cover rounded-lg" alt="">
+                    <div class="flex items-center justify-between bg-white p-2 rounded-lg shadow-sm border border-laylo-accent/10 text-[11px]">
+                        <div class="flex items-center gap-2">
+                            <img src="${prod.img}" class="w-8 h-8 object-cover rounded" alt="">
                             <div>
-                                <h4 class="text-xs font-semibold text-brand-dark">${prod.name[currentLang]}</h4>
-                                <span class="text-[11px] text-brand-deep font-medium">${prod.price.toLocaleString()} so'm</span>
+                                <h4 class="text-[10px] font-semibold text-laylo-dark line-clamp-1">${prod.name[currentLang]}</h4>
+                                <span class="text-[9px] text-laylo-dark font-medium">${prod.price.toLocaleString()} so'm</span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 bg-brand-light border rounded-md flex items-center justify-center text-xs font-bold text-brand-deep">-</button>
-                            <span class="text-xs font-bold px-1">${item.qty}</span>
-                            <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 bg-brand-light border rounded-md flex items-center justify-center text-xs font-bold text-brand-deep">+</button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="w-5 h-5 bg-laylo-bg rounded flex items-center justify-center font-bold text-laylo-dark">-</button>
+                            <span class="font-bold text-xs">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="w-5 h-5 bg-laylo-bg rounded flex items-center justify-center font-bold text-laylo-dark">+</button>
                         </div>
                     </div>
                 `;
@@ -503,7 +511,6 @@
             switchView('cart');
         }
 
-        // TELEGRAM ORQALI BUYURTMA BERISH
         function checkoutOrder() {
             if (cart.length === 0) return;
 
@@ -515,43 +522,35 @@
                 const subtotal = prod.price * item.qty;
                 total += subtotal;
                 textMessage += `${index + 1}. *${prod.name[currentLang]}* \n   ${item.qty} dona x ${prod.price.toLocaleString()} = *${subtotal.toLocaleString()} so'm*\n`;
-                
-                // Omborxona qoldig'ini kamaytirish
                 prod.qty -= item.qty;
             });
 
             textMessage += `\n💵 *Jami summa:* ${total.toLocaleString()} so'm`;
 
-            // Statistikani yangilash
             stats.totalSales += total;
             stats.totalOrders += 1;
             stats.orderHistory.unshift({
                 id: stats.totalOrders,
-                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString().slice(0,5),
                 total: total,
                 itemsCount: cart.length
             });
 
-            // Saqlash
             saveData();
             renderProducts();
             renderWarehouse();
             renderStats();
 
-            // Savatni tozalash
             cart = [];
             renderCart();
 
-            // Telegramga yuborish
             if (tg) {
                 tg.sendData(textMessage);
-                tg.close();
             } else {
-                alert("Buyurtma muvaffaqiyatli qabul qilindi! (Brauzerdan foydalanayotganingiz uchun Telegram xabari simulyatsiya qilindi)\n\n" + textMessage);
+                alert("Buyurtma yuborildi!\n\n" + textMessage);
             }
         }
 
-        // OMBORXONA — MAHSULOT QO'SHISH
         function addNewProduct() {
             const nameUz = document.getElementById('prod-name-uz').value;
             const nameRu = document.getElementById('prod-name-ru').value;
@@ -562,11 +561,11 @@
             let img = document.getElementById('prod-img').value;
 
             if (!nameUz || !nameRu || !nameEn || isNaN(price) || isNaN(qty)) {
-                alert("Iltimos barcha maydonlarni to'g'ri to'ldiring!");
+                alert("Barcha maydonlarni to'ldiring!");
                 return;
             }
 
-            if (!img) img = "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300";
+            if (!img) img = "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=200";
 
             const newProd = {
                 id: Date.now(),
@@ -583,7 +582,6 @@
             renderWarehouse();
             renderStats();
 
-            // Tozalash
             document.getElementById('prod-name-uz').value = '';
             document.getElementById('prod-name-ru').value = '';
             document.getElementById('prod-name-en').value = '';
@@ -594,25 +592,24 @@
             alert("Mahsulot muvaffaqiyatli qo'shildi!");
         }
 
-        // OMBORXONA RO'YXATI
         function renderWarehouse() {
             const adminList = document.getElementById('admin-product-list');
             adminList.innerHTML = '';
 
             products.forEach(p => {
                 adminList.innerHTML += `
-                    <div class="bg-white p-3 rounded-xl shadow-sm border border-brand-pink/20 flex justify-between items-center">
+                    <div class="bg-white p-2 rounded-lg shadow-sm border border-laylo-accent/10 flex justify-between items-center text-[11px]">
                         <div class="flex items-center gap-2">
-                            <img src="${p.img}" class="w-10 h-10 object-cover rounded-lg" alt="">
+                            <img src="${p.img}" class="w-8 h-8 object-cover rounded" alt="">
                             <div>
-                                <h4 class="text-xs font-semibold text-brand-dark">${p.name[currentLang]}</h4>
-                                <span class="text-[10px] text-gray-500">${p.price.toLocaleString()} so'm | <b class="text-brand-deep">${p.qty} ta qoldi</b></span>
+                                <h4 class="font-bold text-laylo-dark line-clamp-1">${p.name[currentLang]}</h4>
+                                <span class="text-[9px] text-gray-400">${p.price.toLocaleString()} so'm | <b class="text-laylo-accent">${p.qty} dona</b></span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="editQty(${p.id}, 5)" class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">+5</button>
-                            <button onclick="deleteProduct(${p.id})" class="bg-red-100 text-red-600 p-1.5 rounded hover:bg-red-200 transition">
-                                <i class="fa-solid fa-trash-can text-xs"></i>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="editQty(${p.id}, 5)" class="bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded text-[10px] font-bold">+5</button>
+                            <button onclick="deleteProduct(${p.id})" class="bg-red-50 text-red-600 p-1.5 rounded hover:bg-red-100 transition">
+                                <i class="fa-solid fa-trash text-[9px]"></i>
                             </button>
                         </div>
                     </div>
@@ -632,7 +629,7 @@
         }
 
         function deleteProduct(id) {
-            if (confirm("Ushbu mahsulotni o'chirishni istaysizmi?")) {
+            if (confirm("Mahsulotni o'chirasizmi?")) {
                 products = products.filter(p => p.id !== id);
                 saveData();
                 renderProducts();
@@ -641,7 +638,6 @@
             }
         }
 
-        // STATISTIKANI CHIQARISH
         function renderStats() {
             document.getElementById('stat-total-sales').innerText = stats.totalSales.toLocaleString() + ' so\'m';
             document.getElementById('stat-total-orders').innerText = stats.totalOrders + ' ta';
@@ -653,16 +649,15 @@
             log.innerHTML = '';
 
             if (stats.orderHistory.length === 0) {
-                log.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Hozircha buyurtmalar yo'q</p>`;
+                log.innerHTML = `<p class="text-[9px] text-gray-400 text-center py-2">Sotuvlar yo'q</p>`;
                 return;
             }
 
             stats.orderHistory.forEach(item => {
                 log.innerHTML += `
-                    <div class="border-b border-gray-100 pb-2 text-[11px] flex justify-between items-center">
+                    <div class="border-b border-pink-50 pb-1 text-[10px] flex justify-between items-center">
                         <div>
-                            <span class="font-bold text-brand-deep">ID #${item.id}</span> - ${item.date}
-                            <div class="text-gray-500">${item.itemsCount} xil mahsulot sotilgan</div>
+                            <span class="font-bold text-laylo-dark">#${item.id}</span> - ${item.date}
                         </div>
                         <span class="font-semibold text-emerald-600">+${item.total.toLocaleString()} so'm</span>
                     </div>
@@ -670,7 +665,7 @@
             });
         }
 
-        // DASTURNI ISHGA TUSHIRISH
+        // Tizimni ilk bor o'zbek tilida ishga tushiramiz
         changeLanguage('uz');
     </script>
 </body>
