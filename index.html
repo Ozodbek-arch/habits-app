@@ -1,162 +1,879 @@
-const translations = {
-  uz: {
-    title: "Gulnora Shop",
-    subtitle: "Ayollar va bolalar kiyimlari do'koni",
-    cart: "Savatcha",
-    emptyCart: "Savatchangiz bo'sh",
-    addToCart: "Savatchaga qo'shish",
-    checkout: "Rasmiylashtirish",
-    name: "Ismingiz",
-    phone: "Telefon raqamingiz",
-    region: "Viloyatingiz / Shahar",
-    delivery: "Etkazib berish turi",
-    total: "Jami",
-    placeOrder: "Buyurtma berish",
-    adminPanel: "Admin Panel",
-    categories: "Kataloglar",
-    addCategory: "Yangi Katalog Qo'shish",
-    editCategory: "Katalogni Tahrirlash",
-    categoryName: "Katalog Nomi",
-    products: "Mahsulotlar",
-    addProduct: "Yangi Mahsulot Qo'shish",
-    uploadImage: "Rasm yuklash",
-    costPrice: "Kelish narxi",
-    sellPrice: "Sotish narxi",
-    save: "Saqlash",
-    delete: "O'chirish",
-    orders: "Buyurtmalar",
-    stats: "Statistika",
-    revenue: "Sof foyda",
-    search: "Qidirish...",
-    all: "Hammasi",
-    selectLang: "Tilni tanlang"
-  },
-  ru: {
-    title: "Gulnora Shop",
-    subtitle: "Магазин женской и детской одежды",
-    cart: "Корзина",
-    emptyCart: "Ваша корзина пуста",
-    addToCart: "Добавить в корзину",
-    checkout: "Оформить заказ",
-    name: "Ваше имя",
-    phone: "Номер телефона",
-    region: "Ваша область / Город",
-    delivery: "Тип доставки",
-    total: "Итого",
-    placeOrder: "Оформить заказ",
-    adminPanel: "Админ панель",
-    categories: "Каталоги",
-    addCategory: "Добавить каталог",
-    editCategory: "Редактировать каталог",
-    categoryName: "Название каталога",
-    products: "Товары",
-    addProduct: "Добавить товар",
-    uploadImage: "Загрузить фото",
-    costPrice: "Себестоимость",
-    sellPrice: "Цена продажи",
-    save: "Сохранить",
-    delete: "Удалить",
-    orders: "Заказы",
-    stats: "Статистика",
-    revenue: "Чистая прибыль",
-    search: "Поиск...",
-    all: "Все",
-    selectLang: "Выберите язык"
-  },
-  en: {
-    title: "Gulnora Shop",
-    subtitle: "Women's and Children's Clothing Store",
-    cart: "Cart",
-    emptyCart: "Your cart is empty",
-    addToCart: "Add to Cart",
-    checkout: "Checkout",
-    name: "Your Name",
-    phone: "Phone Number",
-    region: "Your Region / City",
-    delivery: "Delivery Type",
-    total: "Total",
-    placeOrder: "Place Order",
-    adminPanel: "Admin Panel",
-    categories: "Categories",
-    addCategory: "Add Category",
-    editCategory: "Edit Category",
-    categoryName: "Category Name",
-    products: "Products",
-    addProduct: "Add Product",
-    uploadImage: "Upload Image",
-    costPrice: "Cost Price",
-    sellPrice: "Selling Price",
-    save: "Save",
-    delete: "Delete",
-    orders: "Orders",
-    stats: "Statistics",
-    revenue: "Net Profit",
-    search: "Search...",
-    all: "All",
-    selectLang: "Select Language"
-  },
-  ar: {
-    title: "متجر غلنورا",
-    subtitle: "متجر ملابس نسائية وأطفال",
-    cart: "السلة",
-    emptyCart: "سلتك فارغة",
-    addToCart: "أضف إلى السلة",
-    checkout: "الدفع",
-    name: "اسمك",
-    phone: "رقم الهاتف",
-    region: "المنطقة / المدينة",
-    delivery: "نوع التوصيل",
-    total: "المجموع",
-    placeOrder: "إرسال الطلب",
-    adminPanel: "لوحة التحكم",
-    categories: "الفئات",
-    addCategory: "إضافة فئة جديدة",
-    editCategory: "تعديل الفئة",
-    categoryName: "اسم الفئة",
-    products: "المنتجات",
-    addProduct: "إضافة منتج جديد",
-    uploadImage: "تحميل الصورة",
-    costPrice: "سعر التكلفة",
-    sellPrice: "سعر البيع",
-    save: "حفظ",
-    delete: "حذف",
-    orders: "الطلبات",
-    stats: "الإحصائيات",
-    revenue: "صافي الربح",
-    search: "بحث...",
-    all: "الكل",
-    selectLang: "اختر اللغة"
-  },
-  zh: {
-    title: "Gulnora Shop",
-    subtitle: "女装和童装店",
-    cart: "购物车",
-    emptyCart: "您的购物车是空的",
-    addToCart: "加入购物车",
-    checkout: "去结账",
-    name: "您的姓名",
-    phone: "电话号码",
-    region: "您所在的地区/城市",
-    delivery: "配送方式",
-    total: "总计",
-    placeOrder: "下订单",
-    adminPanel: "管理后台",
-    categories: "商品目录",
-    addCategory: "添加新目录",
-    editCategory: "编辑目录",
-    categoryName: "目录名称",
-    products: "商品",
-    addProduct: "添加新商品",
-    uploadImage: "上传图片",
-    costPrice: "成本价",
-    sellPrice: "售价",
-    save: "保存",
-    delete: "删除",
-    orders: "订单",
-    stats: "统计数据",
-    revenue: "净利润",
-    search: "搜索...",
-    all: "全部",
-    selectLang: "选择语言"
-  }
-};
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laylo Kids</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React va ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Babel (JSX ni ishlatish uchun) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Supabase JS Client -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // ==========================================
+    // ⚙️ SOZLAMALAR (O'zingiznikiga almashtiring)
+    // ==========================================
+    const SUPABASE_URL = "https://your-supabase-url.supabase.co"; 
+    const SUPABASE_KEY = "your-anon-key"; 
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
+    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
+
+    // ==========================================
+    // 🌍 KO'P TILLI LUG'AT (5 XIL TIL) - LAYLO KIDS uchun moslandi
+    // ==========================================
+    const translations = {
+      uz: {
+        title: "Laylo Kids",
+        subtitle: "Sifatli va chiroyli bolalar kiyimlari do'koni",
+        cart: "Savatcha",
+        emptyCart: "Savatchangiz bo'sh",
+        addToCart: "Savatchaga qo'shish",
+        checkout: "Rasmiylashtirish",
+        name: "Ismingiz",
+        phone: "Telefon raqamingiz",
+        region: "Viloyatingiz / Shahar",
+        delivery: "Yetkazib berish turi",
+        pickup: "Olib ketish (Bepul)",
+        deliveryOpt: "Dostavka (+30,000 so'm)",
+        total: "Jami",
+        placeOrder: "Buyurtma berish",
+        adminPanel: "Admin Panel",
+        userPanel: "Mijoz Paneli",
+        categories: "Kataloglar",
+        addCategory: "Yangi Katalog Qo'shish",
+        editCategory: "Katalogni Tahrirlash",
+        categoryName: "Katalog Nomi",
+        products: "Mahsulotlar",
+        addProduct: "Yangi Mahsulot Qo'shish",
+        productName: "Mahsulot nomi",
+        price: "Narxi (Sotish)",
+        costPrice: "Kelish narxi (Tannarxi)",
+        uploadImage: "Rasm yuklash",
+        save: "Saqlash",
+        cancel: "Bekor qilish",
+        delete: "O'chirish",
+        all: "Hammasi",
+        selectLang: "Tilni tanlang",
+        orderSuccess: "Rahmat! Buyurtmangiz qabul qilindi.",
+        fillAll: "Iltimos barcha maydonlarni to'ldiring!",
+        noImage: "Iltimos, rasm yuklang!"
+      },
+      ru: {
+        title: "Laylo Kids",
+        subtitle: "Магазин качественной и красивой детской одежды",
+        cart: "Корзина",
+        emptyCart: "Ваша корзина пуста",
+        addToCart: "Добавить в корзину",
+        checkout: "Оформить заказ",
+        name: "Ваше имя",
+        phone: "Номер телефона",
+        region: "Ваша область / Город",
+        delivery: "Тип доставки",
+        pickup: "Самовывоз (Бесплатно)",
+        deliveryOpt: "Доставка (+30,000 сум)",
+        total: "Итого",
+        placeOrder: "Оформить заказ",
+        adminPanel: "Админ панель",
+        userPanel: "Панель клиента",
+        categories: "Каталоги",
+        addCategory: "Добавить каталог",
+        editCategory: "Редактировать каталог",
+        categoryName: "Название каталога",
+        products: "Товары",
+        addProduct: "Добавить товар",
+        productName: "Название товара",
+        price: "Цена (Продажа)",
+        costPrice: "Себестоимость",
+        uploadImage: "Загрузить фото",
+        save: "Сохранить",
+        cancel: "Отмена",
+        delete: "Удалить",
+        all: "Все",
+        selectLang: "Выберите язык",
+        orderSuccess: "Спасибо! Ваш заказ принят.",
+        fillAll: "Пожалуйста, заполните все поля!",
+        noImage: "Пожалуйста, загрузите изображение!"
+      },
+      en: {
+        title: "Laylo Kids",
+        subtitle: "Quality and Beautiful Children's Clothing Store",
+        cart: "Cart",
+        emptyCart: "Your cart is empty",
+        addToCart: "Add to Cart",
+        checkout: "Checkout",
+        name: "Your Name",
+        phone: "Phone Number",
+        region: "Your Region / City",
+        delivery: "Delivery Type",
+        pickup: "Pickup (Free)",
+        deliveryOpt: "Delivery (+30,000 UZS)",
+        total: "Total",
+        placeOrder: "Place Order",
+        adminPanel: "Admin Panel",
+        userPanel: "User Panel",
+        categories: "Categories",
+        addCategory: "Add Category",
+        editCategory: "Edit Category",
+        categoryName: "Category Name",
+        products: "Products",
+        addProduct: "Add Product",
+        productName: "Product Name",
+        price: "Price (Selling)",
+        costPrice: "Cost Price",
+        uploadImage: "Upload Image",
+        save: "Save",
+        cancel: "Cancel",
+        delete: "Delete",
+        all: "All",
+        selectLang: "Select Language",
+        orderSuccess: "Thank you! Your order has been placed.",
+        fillAll: "Please fill in all fields!",
+        noImage: "Please upload an image!"
+      },
+      ar: {
+        title: "ليلو كيدز",
+        subtitle: "متجر ملابس أطفال أنيقة وذات جودة عالية",
+        cart: "السلة",
+        emptyCart: "سلتك فارغة",
+        addToCart: "أضف إلى السلة",
+        checkout: "الدفع",
+        name: "اسمك",
+        phone: "رقم الهاتف",
+        region: "المنطقة / المدينة",
+        delivery: "نوع التوصيل",
+        pickup: "استلام من المتجر (مجاني)",
+        deliveryOpt: "توصيل (+30,000 سوم)",
+        total: "المجموع",
+        placeOrder: "إرسال الطلب",
+        adminPanel: "لوحة التحكم",
+        userPanel: "واجهة المستخدم",
+        categories: "الفئات",
+        addCategory: "إضافة فئة جديدة",
+        editCategory: "تعديل الفئة",
+        categoryName: "اسم الفئة",
+        products: "المنتجات",
+        addProduct: "إضافة منتج جديد",
+        productName: "اسم المنتج",
+        price: "سعر البيع",
+        costPrice: "سعر التكلفة",
+        uploadImage: "تحميل الصورة",
+        save: "حفظ",
+        cancel: "إلغاء",
+        delete: "حذف",
+        all: "الكل",
+        selectLang: "اختر اللغة",
+        orderSuccess: "شكراً لك! تم استقبال طلبك بنجاح.",
+        fillAll: "يرجى ملء جميع الحقول!",
+        noImage: "يرجى تحميل صورة المنتج!"
+      },
+      zh: {
+        title: "Laylo Kids",
+        subtitle: "高品质精美童装店",
+        cart: "购物车",
+        emptyCart: "您的购物车是空的",
+        addToCart: "加入购物车",
+        checkout: "去结账",
+        name: "您的姓名",
+        phone: "电话号码",
+        region: "您所在的地区/城市",
+        delivery: "配送方式",
+        pickup: "自提 (免费)",
+        deliveryOpt: "配送 (+30,000 苏姆)",
+        total: "总计",
+        placeOrder: "下订单",
+        adminPanel: "管理后台",
+        userPanel: "用户界面",
+        categories: "商品目录",
+        addCategory: "添加新目录",
+        editCategory: "编辑目录",
+        categoryName: "目录名称",
+        products: "商品",
+        addProduct: "添加新商品",
+        productName: "商品名称",
+        price: "售价",
+        costPrice: "成本价",
+        uploadImage: "上传图片",
+        save: "保存",
+        cancel: "取消",
+        delete: "删除",
+        all: "全部",
+        selectLang: "选择语言",
+        orderSuccess: "谢谢！您的订单已成功提交。",
+        fillAll: "请填写所有必填字段！",
+        noImage: "请上传产品图片！"
+      }
+    };
+
+    function App() {
+      const [lang, setLang] = useState('uz');
+      const t = translations[lang];
+
+      // Ma'lumotlar state-lari
+      const [categories, setCategories] = useState([]);
+      const [products, setProducts] = useState([]);
+      const [cart, setCart] = useState([]);
+      const [selectedCategory, setSelectedCategory] = useState('all');
+
+      // Admin state-lari
+      const [isAdmin, setIsAdmin] = useState(false);
+      const [showCatModal, setShowCatModal] = useState(false);
+      const [editingCategory, setEditingCategory] = useState(null);
+      const [categoryInput, setCategoryInput] = useState('');
+
+      // Mahsulot qo'shish state-lari
+      const [showProdModal, setShowProdModal] = useState(false);
+      const [prodName, setProdName] = useState('');
+      const [prodPrice, setProdPrice] = useState('');
+      const [prodCost, setProdCost] = useState('');
+      const [prodCatId, setProdCatId] = useState('');
+      const [uploading, setUploading] = useState(false);
+      const [uploadedUrl, setUploadedUrl] = useState('');
+
+      // Buyurtma berish oynasi state-lari
+      const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+      const [custName, setCustName] = useState('');
+      const [custPhone, setCustPhone] = useState('');
+      const [custRegion, setCustRegion] = useState('');
+      const [deliveryType, setDeliveryType] = useState('pickup');
+
+      useEffect(() => {
+        fetchCategories();
+        fetchProducts();
+      }, []);
+
+      const fetchCategories = async () => {
+        const { data, error } = await supabase.from('categories').select('*');
+        if (!error && data) setCategories(data);
+      };
+
+      const fetchProducts = async () => {
+        const { data, error } = await supabase.from('products').select('*');
+        if (!error && data) setProducts(data);
+      };
+
+      // ==========================================
+      // 📂 KATALOG (KATEGORIYA) CRUD AMALLARI
+      // ==========================================
+      const handleSaveCategory = async () => {
+        if (!categoryInput.trim()) return;
+
+        if (editingCategory) {
+          const { error } = await supabase
+            .from('categories')
+            .update({ name: categoryInput })
+            .eq('id', editingCategory.id);
+          if (error) console.error(error);
+        } else {
+          const { error } = await supabase
+            .from('categories')
+            .insert([{ name: categoryInput }]);
+          if (error) console.error(error);
+        }
+
+        setCategoryInput('');
+        setEditingCategory(null);
+        setShowCatModal(false);
+        fetchCategories();
+      };
+
+      const handleDeleteCategory = async (id) => {
+        if (confirm("Katalogni o'chirmoqchimisiz?")) {
+          await supabase.from('categories').delete().eq('id', id);
+          fetchCategories();
+        }
+      };
+
+      // ==========================================
+      // ☁️ SUPABASE STORAGE GA RASM YUKLASH
+      // ==========================================
+      const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          setUploading(true);
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const filePath = `products/${fileName}`;
+
+          const { error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(filePath, file);
+
+          if (uploadError) throw uploadError;
+
+          const { data } = supabase.storage.from('images').getPublicUrl(filePath);
+          setUploadedUrl(data.publicUrl);
+        } catch (error) {
+          alert('Rasm yuklashda xatolik yuz berdi: ' + error.message);
+        } finally {
+          setUploading(false);
+        }
+      };
+
+      // ==========================================
+      // 📦 MAHSULOT QO'SHISH AMALI
+      // ==========================================
+      const handleSaveProduct = async () => {
+        if (!prodName || !prodPrice || !prodCatId) {
+          alert(t.fillAll);
+          return;
+        }
+        if (!uploadedUrl) {
+          alert(t.noImage);
+          return;
+        }
+
+        const { error } = await supabase.from('products').insert([{
+          name: prodName,
+          price: parseFloat(prodPrice),
+          cost_price: parseFloat(prodCost) || 0,
+          category_id: parseInt(prodCatId),
+          image: uploadedUrl
+        }]);
+
+        if (!error) {
+          setShowProdModal(false);
+          setProdName('');
+          setProdPrice('');
+          setProdCost('');
+          setUploadedUrl('');
+          fetchProducts();
+        } else {
+          console.error(error);
+        }
+      };
+
+      const handleDeleteProduct = async (id) => {
+        if (confirm("Ushbu mahsulotni o'chirmoqchimisiz?")) {
+          await supabase.from('products').delete().eq('id', id);
+          fetchProducts();
+        }
+      };
+
+      // ==========================================
+      // 🛒 SAVATCHA HISOBLASH VA BUYURTMA YUKLASH
+      // ==========================================
+      const getDeliveryCost = () => deliveryType === 'delivery' ? 30000 : 0;
+      const getCartSubtotal = () => cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const getCartTotal = () => getCartSubtotal() + getDeliveryCost();
+
+      const handlePlaceOrder = async () => {
+        if (!custName || !custPhone || !custRegion) {
+          alert(t.fillAll);
+          return;
+        }
+
+        const total = getCartTotal();
+
+        // Supabase-ga buyurtmani saqlash
+        const { error } = await supabase.from('orders').insert([{
+          customer_name: custName,
+          phone: custPhone,
+          region: custRegion,
+          delivery_type: deliveryType,
+          delivery_cost: getDeliveryCost(),
+          total_price: total,
+          items: cart
+        }]);
+
+        if (error) {
+          alert("Xatolik yuz berdi: " + error.message);
+          return;
+        }
+
+        // Telegramga jo'natish
+        const orderItemsText = cart.map(item => `👕 ${item.name} x ${item.quantity} - ${(item.price * item.quantity).toLocaleString()} so'm`).join('\n');
+        const telegramMessage = `
+🛍️ *YANGI BUYURTMA (Laylo Kids)*
+━━━━━━━━━━━━━━━━━━
+👤 *Mijoz:* ${custName}
+📞 *Telefon:* ${custPhone}
+📍 *Viloyat:* ${custRegion}
+🚚 *Etkazib berish:* ${deliveryType === 'delivery' ? "Dostavka (30k so'm)" : "Olib ketish (Bepul)"}
+
+📦 *Maxsulotlar:*
+${orderItemsText}
+
+💰 *Tovarlar:* ${getCartSubtotal().toLocaleString()} so'm
+🚚 *Dostavka:* ${getDeliveryCost().toLocaleString()} so'm
+💵 *JAMI TO'LOV:* ${total.toLocaleString()} so'm
+━━━━━━━━━━━━━━━━━━
+        `;
+
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: telegramMessage,
+              parse_mode: "Markdown"
+            })
+          });
+        } catch (tgErr) {
+          console.error("Telegramga yuborishda xato:", tgErr);
+        }
+
+        alert(t.orderSuccess);
+        setCart([]);
+        setIsCheckoutOpen(false);
+        setCustName('');
+        setCustPhone('');
+        setCustRegion('');
+      };
+
+      const changeQuantity = (productId, amount) => {
+        setCart(cart.map(item => {
+          if (item.id === productId) {
+            const newQty = item.quantity + amount;
+            return newQty > 0 ? { ...item, quantity: newQty } : null;
+          }
+          return item;
+        }).filter(Boolean));
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-50 pb-20" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+          
+          {/* HEADER */}
+          <header className="bg-white shadow-sm sticky top-0 z-40">
+            <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+              <div>
+                <h1 className="text-3xl font-extrabold text-pink-600 tracking-wide">{t.title}</h1>
+                <p className="text-sm text-gray-400 font-medium">{t.subtitle}</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-gray-400 font-semibold">{t.selectLang}:</span>
+                  <select 
+                    value={lang} 
+                    onChange={(e) => setLang(e.target.value)}
+                    className="bg-gray-100 border rounded px-2 py-1 text-sm font-semibold outline-none focus:ring-2 focus:ring-pink-500"
+                  >
+                    <option value="uz">🇺🇿 UZ</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="zh">🇨🇳 ZH</option>
+                  </select>
+                </div>
+
+                <button 
+                  onClick={() => setIsAdmin(!isAdmin)}
+                  className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all duration-300 ${isAdmin ? 'bg-pink-600 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                >
+                  {isAdmin ? t.userPanel : t.adminPanel}
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* MAIN VIEW */}
+          <main className="max-w-6xl mx-auto px-4 mt-8">
+            
+            {/* ADMIN PANELI */}
+            {isAdmin ? (
+              <div className="space-y-8">
+                {/* 1. KATALOG SECTION */}
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-gray-800">{t.categories}</h2>
+                    <button 
+                      onClick={() => { setEditingCategory(null); setCategoryInput(''); setShowCatModal(true); }}
+                      className="bg-pink-600 text-white font-semibold px-4 py-2 rounded-xl text-sm hover:bg-pink-700 transition"
+                    >
+                      + {t.addCategory}
+                    </button>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {categories.map(cat => (
+                      <div key={cat.id} className="p-4 bg-gray-50 border rounded-2xl flex items-center justify-between">
+                        <span className="font-semibold text-gray-700">{cat.name}</span>
+                        <div className="flex gap-1">
+                          <button 
+                            onClick={() => { setEditingCategory(cat); setCategoryInput(cat.name); setShowCatModal(true); }}
+                            className="p-1 hover:bg-gray-200 rounded"
+                          >✏️</button>
+                          <button 
+                            onClick={() => handleDeleteCategory(cat.id)}
+                            className="p-1 hover:bg-gray-200 rounded text-red-500"
+                          >🗑️</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. MAHSULOTLARNI EDIT QILISH */}
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-gray-800">{t.products}</h2>
+                    <button 
+                      onClick={() => setShowProdModal(true)}
+                      className="bg-pink-600 text-white font-semibold px-4 py-2 rounded-xl text-sm hover:bg-pink-700 transition"
+                    >
+                      + {t.addProduct}
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    {products.map(prod => (
+                      <div key={prod.id} className="border rounded-2xl p-4 flex flex-col justify-between">
+                        <img src={prod.image} className="h-40 w-full object-cover rounded-xl mb-3" />
+                        <div>
+                          <h4 className="font-bold text-gray-800">{prod.name}</h4>
+                          <p className="text-sm text-gray-500">Kelish: {prod.cost_price?.toLocaleString()} so'm</p>
+                          <p className="text-pink-600 font-bold">{prod.price?.toLocaleString()} so'm</p>
+                        </div>
+                        <button 
+                          onClick={() => handleDeleteProduct(prod.id)}
+                          className="w-full bg-red-50 hover:bg-red-100 text-red-600 text-xs py-1.5 rounded-lg mt-3 font-semibold transition"
+                        >
+                          {t.delete}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // MIJOZ REJIMIDAGI DO'KON QISMI
+              <div className="flex flex-col md:flex-row gap-8">
+                {/* Kategoriyalar filtri menyusi */}
+                <div className="w-full md:w-1/4">
+                  <div className="bg-white p-4 rounded-2xl shadow-sm border sticky top-24">
+                    <h3 className="font-bold text-lg mb-4 text-gray-800 border-b pb-2">{t.categories}</h3>
+                    <div className="flex flex-row md:flex-col gap-1.5 overflow-x-auto pb-3 md:pb-0">
+                      <button 
+                        onClick={() => setSelectedCategory('all')}
+                        className={`whitespace-nowrap px-4 py-2 rounded-xl text-left text-sm font-semibold transition ${selectedCategory === 'all' ? 'bg-pink-500 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}
+                      >
+                        {t.all}
+                      </button>
+                      {categories.map(cat => (
+                        <button 
+                          key={cat.id}
+                          onClick={() => setSelectedCategory(cat.id)}
+                          className={`whitespace-nowrap px-4 py-2 rounded-xl text-left text-sm font-semibold transition ${selectedCategory === cat.id ? 'bg-pink-500 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}
+                        >
+                          {cat.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mahsulotlar oynasi */}
+                <div className="w-full md:w-3/4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {products
+                      .filter(p => selectedCategory === 'all' || p.category_id === selectedCategory)
+                      .map(product => (
+                        <div key={product.id} className="bg-white rounded-2xl shadow-sm hover:shadow-md transition duration-300 border overflow-hidden flex flex-col justify-between">
+                          <img src={product.image} className="h-64 w-full object-cover" />
+                          <div className="p-4 flex-1 flex flex-col justify-between">
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 line-clamp-1">{product.name}</h4>
+                              <p className="text-pink-600 font-extrabold mt-2 text-xl">{product.price?.toLocaleString()} so'm</p>
+                            </div>
+                            <button 
+                              onClick={() => {
+                                const found = cart.find(item => item.id === product.id);
+                                if (found) {
+                                  setCart(cart.map(item => item.id === product.id ? {...item, quantity: item.quantity + 1} : item));
+                                } else {
+                                  setCart([...cart, {...product, quantity: 1}]);
+                                }
+                              }}
+                              className="w-full bg-pink-500 hover:bg-pink-600 text-white py-2.5 rounded-xl mt-4 font-bold transition shadow-sm"
+                            >
+                              + {t.addToCart}
+                            </button>
+                          </div>
+                        </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </main>
+
+          {/* SARIQ (SAVATCHA TUGMASI) */}
+          {cart.length > 0 && !isAdmin && (
+            <div className="fixed bottom-6 right-6 z-50">
+              <button 
+                onClick={() => setIsCheckoutOpen(true)}
+                className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-bold text-lg transition duration-300 transform hover:scale-105"
+              >
+                🛒 {t.cart} ({cart.reduce((sum, i) => sum + i.quantity, 0)})
+              </button>
+            </div>
+          )}
+
+          {/* ==========================================
+              📥 MODAL: KATALOG TARTIBINI O'ZGARTIRISH
+             ========================================== */}
+          {showCatModal && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+              <div className="bg-white p-6 rounded-3xl shadow-xl w-full max-w-md">
+                <h3 className="text-xl font-bold mb-4 text-gray-800">{editingCategory ? t.editCategory : t.addCategory}</h3>
+                <input 
+                  type="text" 
+                  value={categoryInput} 
+                  onChange={(e) => setCategoryInput(e.target.value)}
+                  placeholder="Masalan: Qizlar kiyimi" 
+                  className="w-full border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-pink-500 mb-4" 
+                />
+                <div className="flex justify-end gap-2">
+                  <button 
+                    onClick={() => setShowCatModal(false)}
+                    className="px-4 py-2 bg-gray-100 rounded-xl text-sm font-semibold hover:bg-gray-200"
+                  >
+                    {t.cancel}
+                  </button>
+                  <button 
+                    onClick={handleSaveCategory}
+                    className="px-4 py-2 bg-pink-600 text-white rounded-xl text-sm font-semibold hover:bg-pink-700"
+                  >
+                    {t.save}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ==========================================
+              📥 MODAL: MAHSULOT QO'SHISH
+             ========================================== */}
+          {showProdModal && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+              <div className="bg-white p-6 rounded-3xl shadow-xl w-full max-w-md">
+                <h3 className="text-xl font-bold mb-4 text-gray-800">{t.addProduct}</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.productName}</label>
+                    <input 
+                      type="text" 
+                      value={prodName} 
+                      onChange={(e) => setProdName(e.target.value)}
+                      className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-xs font-bold text-gray-500 mb-1">{t.price}</label>
+                      <input 
+                        type="number" 
+                        value={prodPrice} 
+                        onChange={(e) => setProdPrice(e.target.value)}
+                        className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-500 mb-1">{t.costPrice}</label>
+                      <input 
+                        type="number" 
+                        value={prodCost} 
+                        onChange={(e) => setProdCost(e.target.value)}
+                        className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.categories}</label>
+                    <select 
+                      value={prodCatId} 
+                      onChange={(e) => setProdCatId(e.target.value)}
+                      className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500"
+                    >
+                      <option value="">Katalogni tanlang</option>
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.uploadImage}</label>
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
+                    />
+                    {uploading && <p className="text-xs text-pink-500 mt-1 animate-pulse">Yuklanmoqda...</p>}
+                    {uploadedUrl && (
+                      <img src={uploadedUrl} className="h-20 w-20 object-cover rounded-xl mt-2 border border-gray-200" />
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-2 mt-6">
+                  <button 
+                    onClick={() => setShowProdModal(false)}
+                    className="px-4 py-2 bg-gray-100 rounded-xl text-sm font-semibold hover:bg-gray-200"
+                  >
+                    {t.cancel}
+                  </button>
+                  <button 
+                    onClick={handleSaveProduct}
+                    className="px-4 py-2 bg-pink-600 text-white rounded-xl text-sm font-semibold hover:bg-pink-700"
+                  >
+                    {t.save}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ==========================================
+              📥 MODAL: BUYURTMA RASMIYLASHTIRISH
+             ========================================== */}
+          {isCheckoutOpen && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+              <div className="bg-white p-6 rounded-3xl shadow-xl w-full max-w-lg">
+                <div className="flex justify-between items-center mb-4 border-b pb-3">
+                  <h3 className="text-2xl font-extrabold text-gray-800">{t.checkout}</h3>
+                  <button onClick={() => setIsCheckoutOpen(false)} className="text-gray-400 hover:text-gray-600 text-3xl">&times;</button>
+                </div>
+
+                {/* Tanlangan tovarlar ro'yxati va tahriri */}
+                <div className="max-h-40 overflow-y-auto space-y-2.5 mb-4 pr-1">
+                  {cart.map(item => (
+                    <div key={item.id} className="flex justify-between items-center bg-gray-50 p-2.5 rounded-xl border">
+                      <div className="flex items-center gap-2">
+                        <img src={item.image} className="w-10 h-10 object-cover rounded-lg" />
+                        <div>
+                          <span className="font-bold text-sm text-gray-700 block">{item.name}</span>
+                          <span className="text-xs text-pink-600 font-semibold">{item.price?.toLocaleString()} so'm</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => changeQuantity(item.id, -1)} className="bg-gray-200 px-2 py-0.5 rounded text-sm font-bold">-</button>
+                        <span className="font-bold text-sm">{item.quantity}</span>
+                        <button onClick={() => changeQuantity(item.id, 1)} className="bg-gray-200 px-2 py-0.5 rounded text-sm font-bold">+</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mijoz Ma'lumotlarini kiritish shakli */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.name}</label>
+                    <input 
+                      type="text" 
+                      value={custName} 
+                      onChange={(e) => setCustName(e.target.value)}
+                      className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.phone}</label>
+                    <input 
+                      type="tel" 
+                      value={custPhone} 
+                      onChange={(e) => setCustPhone(e.target.value)}
+                      placeholder="+998 90 123 45 67"
+                      className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-1">{t.region}</label>
+                    <input 
+                      type="text" 
+                      value={custRegion} 
+                      onChange={(e) => setCustRegion(e.target.value)}
+                      placeholder="Farg'ona, Qo'qon shahar"
+                      className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-pink-500" 
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 mb-2">{t.delivery}</label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 cursor-pointer font-medium text-sm text-gray-600">
+                        <input 
+                          type="radio" 
+                          name="delivery" 
+                          value="pickup" 
+                          checked={deliveryType === 'pickup'} 
+                          onChange={() => setDeliveryType('pickup')}
+                          className="accent-pink-600"
+                        />
+                        <span>{t.pickup}</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer font-medium text-sm text-gray-600">
+                        <input 
+                          type="radio" 
+                          name="delivery" 
+                          value="delivery" 
+                          checked={deliveryType === 'delivery'} 
+                          onChange={() => setDeliveryType('delivery')}
+                          className="accent-pink-600"
+                        />
+                        <span>{t.deliveryOpt}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Yakuniy summa */}
+                <div className="bg-pink-50/50 border border-pink-100 p-4 rounded-2xl mt-5 space-y-2">
+                  <div className="flex justify-between text-sm text-gray-500 font-medium">
+                    <span>Tovarlar summasi:</span>
+                    <span>{getCartSubtotal().toLocaleString()} so'm</span>
+                  </div>
+                  <div className="flex justify-between text-sm text-gray-500 font-medium">
+                    <span>Etkazib berish:</span>
+                    <span>{getDeliveryCost().toLocaleString()} so'm</span>
+                  </div>
+                  <div className="flex justify-between font-extrabold text-lg border-t pt-2 text-pink-600">
+                    <span>{t.total}:</span>
+                    <span>{getCartTotal().toLocaleString()} so'm</span>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={handlePlaceOrder}
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white font-extrabold py-3 rounded-2xl mt-5 transition shadow-lg"
+                >
+                  {t.placeOrder}
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
