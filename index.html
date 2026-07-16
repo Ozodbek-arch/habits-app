@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Laylo Kids - Online Do'kon</title>
+    <!-- Telegram Web App Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Google Fonts & Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#FFF0F5', /* Lavender Blush */
+                            pink: '#FFB7C5',  /* Sakura Pink */
+                            deep: '#800020',  /* Burgundy */
+                            gold: '#D4AF37',  /* Metallic Gold */
+                            dark: '#2C1B1F'   /* Very Dark Purple/Brown */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF0F5;
+            background-image: radial-gradient(circle at 100% 150%, #FFB7C5 24%, #FFF0F5 25%, #FFF0F5 28%, #FFB7C5 29%, #FFF0F5 36%, #FFF0F5 40%, #FFB7C5 41%, #FFF0F5 42%, #FFF0F5 48%, #FFB7C5 49%, #FFF0F5 50%);
+            background-size: 40px 40px;
+            background-opacity: 0.15;
+        }
+        /* Elegant floral element */
+        .floral-header {
+            background: linear-gradient(135deg, #800020 0%, #4A0010 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .floral-header::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
+            top: -50px;
+            right: -50px;
+            border-radius: 50%;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #800020;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-brand-dark pb-24">
+
+    <!-- HEADER -->
+    <header class="floral-header text-white px-4 py-6 rounded-b-[2rem] shadow-lg relative">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="font-serif text-3xl font-bold tracking-wider text-brand-gold flex items-center gap-2">
+                    🌸 Laylo Kids
+                </h1>
+                <p id="app-subtitle" class="text-xs text-pink-200 mt-1">Ayollar va bolalar olami</p>
+            </div>
+            <!-- Language Selector -->
+            <div class="relative">
+                <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-brand-deep text-brand-gold border border-brand-gold rounded-full px-2 py-1 text-xs outline-none font-bold">
+                    <option value="uz">UZ</option>
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT VIEWS -->
+    <main class="container mx-auto px-4 mt-6">
+
+        <!-- 1. CATALOG / SHOP VIEW -->
+        <section id="view-shop" class="view-section">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="title-catalog" class="font-serif text-xl font-bold text-brand-deep border-b-2 border-brand-gold pb-1">Katalog</h2>
+                <span id="cart-badge-container" onclick="openCart()" class="relative cursor-pointer bg-brand-deep text-white px-3 py-1.5 rounded-full flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-basket-shopping text-brand-gold"></i>
+                    <span id="cart-total-price" class="text-xs font-semibold">0 so'm</span>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-gold text-brand-dark text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow border-2 border-brand-light">0</span>
+                </span>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="flex gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar">
+                <button onclick="filterCategory('all')" class="category-btn active bg-brand-deep text-white px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition shadow-sm" id="cat-all">Hammasi</button>
+                <button onclick="filterCategory('women')" class="category-btn bg-white text-brand-deep border border-brand-pink/50 px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition" id="cat-women">Ayollar uchun</button>
+                <button onclick="filterCategory('kids')" class="category-btn bg-white text-brand-deep border border-brand-pink/50 px-4 py-1.5 rounded-full text-xs font-medium shrink-0 transition" id="cat-kids">Yosh bolalar</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-2 gap-4">
+                <!-- Dinamik ravishda yuklanadi -->
+            </div>
+        </section>
+
+        <!-- 2. CART MODAL/VIEW -->
+        <section id="view-cart" class="view-section hidden">
+            <h2 id="title-cart" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Sizning savatingiz</h2>
+            <div id="cart-items" class="space-y-3 mb-6">
+                <!-- Savat darslari yuklanadi -->
+            </div>
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-brand-pink/30 mb-6">
+                <div class="flex justify-between font-bold text-brand-deep mb-2">
+                    <span id="lbl-total">Jami summa:</span>
+                    <span id="cart-summary-total">0 so'm</span>
+                </div>
+            </div>
+            <button onclick="checkoutOrder()" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-emerald-700 transition flex justify-center items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> <span id="btn-checkout">Buyurtma berish (Telegram orqali)</span>
+            </button>
+        </section>
+
+        <!-- 3. WAREHOUSE (OMBORXONA) VIEW -->
+        <section id="view-warehouse" class="view-section hidden">
+            <h2 id="title-warehouse" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Omborxona nazorati</h2>
+            
+            <!-- Add Product Form -->
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-brand-pink/30 mb-6">
+                <h3 id="form-add-title" class="font-semibold text-brand-deep mb-3 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-brand-gold"></i> Yangi mahsulot qo'shish
+                </h3>
+                <div class="space-y-3">
+                    <input type="text" id="prod-name-uz" placeholder="Mahsulot nomi (O'zbekcha)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                    <input type="text" id="prod-name-ru" placeholder="Mahsulot nomi (Русский)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                    <input type="text" id="prod-name-en" placeholder="Mahsulot nomi (English)" class="w-full p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                    
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="number" id="prod-price" placeholder="Narxi (so'm)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                        <input type="number" id="prod-qty" placeholder="Miqdori (dona)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <select id="prod-category" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep bg-white">
+                            <option value="women">Ayollar</option>
+                            <option value="kids">Yosh bolalar</option>
+                        </select>
+                        <input type="text" id="prod-img" placeholder="Rasm URL (ixtiyoriy)" class="p-2.5 rounded-lg border border-brand-pink/50 text-xs outline-none focus:border-brand-deep">
+                    </div>
+                    <button onclick="addNewProduct()" class="w-full bg-brand-deep text-brand-gold font-bold py-2.5 rounded-lg text-xs shadow-md flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-arrow-down-long"></i> <span id="btn-save-prod">Saqlash</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Product List -->
+            <div class="space-y-3" id="admin-product-list">
+                <!-- Omborxonadagi mahsulotlar boshqaruvi -->
+            </div>
+        </section>
+
+        <!-- 4. STATISTICS VIEW -->
+        <section id="view-stats" class="view-section hidden">
+            <h2 id="title-stats" class="font-serif text-2xl font-bold text-brand-deep border-b-2 border-brand-gold pb-2 mb-4">Moliyaviy Statistika</h2>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-emerald-500">
+                    <p id="lbl-total-sales" class="text-xs text-gray-500 uppercase font-semibold">Umumiy Savdo</p>
+                    <p id="stat-total-sales" class="text-lg font-bold text-emerald-600 mt-1">0 so'm</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-blue-500">
+                    <p id="lbl-total-orders" class="text-xs text-gray-500 uppercase font-semibold">Buyurtmalar</p>
+                    <p id="stat-total-orders" class="text-xl font-bold text-blue-600 mt-1">0 ta</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow border-l-4 border-brand-gold col-span-2">
+                    <p id="lbl-warehouse-value" class="text-xs text-gray-500 uppercase font-semibold">Ombordagi tovarlar qiymati</p>
+                    <p id="stat-warehouse-value" class="text-lg font-bold text-brand-dark mt-1">0 so'm</p>
+                </div>
+            </div>
+
+            <!-- Recent Orders Log -->
+            <div class="bg-white p-4 rounded-2xl shadow border border-brand-pink/30">
+                <h3 id="title-order-history" class="font-bold text-brand-deep mb-3 text-sm">Buyurtmalar tarixi</h3>
+                <div id="order-history-list" class="space-y-3 max-h-60 overflow-y-auto">
+                    <!-- Tarixiy sotuvlar -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-brand-pink/30 py-2 px-4 flex justify-around items-center shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-2xl z-50">
+        <button onclick="switchView('shop')" id="nav-shop" class="flex flex-col items-center text-brand-deep">
+            <i class="fa-solid fa-store text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_shop">Do'kon</span>
+        </button>
+        <button onclick="switchView('cart')" id="nav-cart" class="flex flex-col items-center text-gray-400">
+            <div class="relative">
+                <i class="fa-solid fa-basket-shopping text-lg"></i>
+                <span id="nav-cart-count" class="absolute -top-1.5 -right-2 bg-brand-gold text-brand-dark text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </div>
+            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_cart">Savat</span>
+        </button>
+        <button onclick="switchView('warehouse')" id="nav-warehouse" class="flex flex-col items-center text-gray-400">
+            <i class="fa-solid fa-warehouse text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_warehouse">Ombor</span>
+        </button>
+        <button onclick="switchView('stats')" id="nav-stats" class="flex flex-col items-center text-gray-400">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium nav-label" data-key="nav_stats">Statistika</span>
+        </button>
+    </nav>
+
+    <!-- LOGICAL SCRIPTS -->
+    <script>
+        // Telegram WebApp init
+        const tg = window.Telegram ? window.Telegram.WebApp : null;
+        if (tg) {
+            tg.ready();
+            tg.expand();
+        }
+
+        // Tillar lug'ati
+        const translations = {
+            uz: {
+                subtitle: "Ayollar va bolalar olami",
+                catalog: "Katalog",
+                all: "Hammasi",
+                women: "Ayollar uchun",
+                kids: "Yosh bolalar",
+                cart: "Sizning savatingiz",
+                total: "Jami summa:",
+                checkout: "Buyurtma berish (Telegram)",
+                warehouse: "Omborxona nazorati",
+                add_title: "Yangi mahsulot qo'shish",
+                save: "Saqlash",
+                stats: "Moliyaviy Statistika",
+                total_sales: "Umumiy Savdo",
+                total_orders: "Buyurtmalar",
+                warehouse_value: "Ombordagi tovarlar qiymati",
+                order_history: "Buyurtmalar tarixi",
+                nav_shop: "Do'kon",
+                nav_cart: "Savat",
+                nav_warehouse: "Ombor",
+                nav_stats: "Statistika",
+                added: "Savatga qo'shildi",
+                out_stock: "Omborda yetarli emas!"
+            },
+            ru: {
+                subtitle: "Мир женщин и детей",
+                catalog: "Каталог",
+                all: "Все",
+                women: "Для женщин",
+                kids: "Для детей",
+                cart: "Ваша корзина",
+                total: "Итоговая сумма:",
+                checkout: "Оформить заказ (через Telegram)",
+                warehouse: "Управление складом",
+                add_title: "Добавить новый товар",
+                save: "Сохранить",
+                stats: "Финансовая статистика",
+                total_sales: "Общие продажи",
+                total_orders: "Заказы",
+                warehouse_value: "Стоимость товаров на складе",
+                order_history: "История заказов",
+                nav_shop: "Магазин",
+                nav_cart: "Корзина",
+                nav_warehouse: "Склад",
+                nav_stats: "Статистика",
+                added: "Добавлено в корзину",
+                out_stock: "Недостаточно на складе!"
+            },
+            en: {
+                subtitle: "Women and Kids World",
+                catalog: "Catalog",
+                all: "All",
+                women: "For Women",
+                kids: "Kids Wear",
+                cart: "Your Cart",
+                total: "Total Price:",
+                checkout: "Place Order (via Telegram)",
+                warehouse: "Warehouse Control",
+                add_title: "Add New Product",
+                save: "Save Product",
+                stats: "Financial Statistics",
+                total_sales: "Total Sales",
+                total_orders: "Orders",
+                warehouse_value: "Warehouse Inventory Value",
+                order_history: "Order History",
+                nav_shop: "Shop",
+                nav_cart: "Cart",
+                nav_warehouse: "Warehouse",
+                nav_stats: "Stats",
+                added: "Added to cart",
+                out_stock: "Not enough in stock!"
+            }
+        };
+
+        let currentLang = 'uz';
+
+        // Boshlang'ich Mahsulotlar (Local Storage bo'sh bo'lsa)
+        const defaultProducts = [
+            { id: 1, name: { uz: "Nafis atlas ko'ylak", ru: "Элегантное платье из атласа", en: "Elegant Atlas Dress" }, price: 350000, qty: 15, category: "women", img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300" },
+            { id: 2, name: { uz: "Bolalar trikotaj kiyimi", ru: "Детский трикотажный комплект", en: "Kids Knitwear Set" }, price: 120000, qty: 25, category: "kids", img: "https://images.unsplash.com/photo-1519704943960-ab38fa2c4621?w=300" },
+            { id: 3, name: { uz: "Ayollar bahoriy kamzoli", ru: "Женский весенний кардиган", en: "Women Spring Cardigan" }, price: 420000, qty: 8, category: "women", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300" },
+            { id: 4, name: { uz: "Mitti bejirim qizlar ko'ylagi", ru: "Милое платье для девочек", en: "Cute Girls Dress" }, price: 180000, qty: 12, category: "kids", img: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=300" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('laylo_products')) || defaultProducts;
+        let cart = [];
+        let stats = JSON.parse(localStorage.getItem('laylo_stats')) || { totalSales: 0, totalOrders: 0, orderHistory: [] };
+
+        function saveData() {
+            localStorage.setItem('laylo_products', JSON.stringify(products));
+            localStorage.setItem('laylo_stats', JSON.stringify(stats));
+        }
+
+        // TILLARNI ALMASHTIRISH
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('app-subtitle').innerText = translations[lang].subtitle;
+            document.getElementById('title-catalog').innerText = translations[lang].catalog;
+            document.getElementById('cat-all').innerText = translations[lang].all;
+            document.getElementById('cat-women').innerText = translations[lang].women;
+            document.getElementById('cat-kids').innerText = translations[lang].kids;
+            document.getElementById('title-cart').innerText = translations[lang].cart;
+            document.getElementById('lbl-total').innerText = translations[lang].total;
+            document.getElementById('btn-checkout').innerText = translations[lang].checkout;
+            document.getElementById('title-warehouse').innerText = translations[lang].warehouse;
+            document.getElementById('form-add-title').innerText = translations[lang].add_title;
+            document.getElementById('btn-save-prod').innerText = translations[lang].save;
+            document.getElementById('title-stats').innerText = translations[lang].stats;
+            document.getElementById('lbl-total-sales').innerText = translations[lang].total_sales;
+            document.getElementById('lbl-total-orders').innerText = translations[lang].total_orders;
+            document.getElementById('lbl-warehouse-value').innerText = translations[lang].warehouse_value;
+            document.getElementById('title-order-history').innerText = translations[lang].order_history;
+
+            // Nav bar labels
+            document.querySelectorAll('.nav-label').forEach(label => {
+                const key = label.getAttribute('data-key');
+                label.innerText = translations[lang][key];
+            });
+
+            renderProducts();
+            renderWarehouse();
+            renderStats();
+            renderCart();
+        }
+
+        // VIEW ALMASHTIRUVCHI
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+            // Nav tugmalari rangini yangilash
+            const navs = ['shop', 'cart', 'warehouse', 'stats'];
+            navs.forEach(nav => {
+                const navBtn = document.getElementById(`nav-${nav}`);
+                if (nav === viewId) {
+                    navBtn.classList.remove('text-gray-400');
+                    navBtn.classList.add('text-brand-deep');
+                } else {
+                    navBtn.classList.remove('text-brand-deep');
+                    navBtn.classList.add('text-gray-400');
+                }
+            });
+        }
+
+        // MAHSULOTLARNI KATALOGGA CHIQARISH
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const isOutOfStock = p.qty <= 0;
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-brand-pink/20 flex flex-col justify-between">
+                        <img src="${p.img || 'https://via.placeholder.com/150?text=Laylo+Kids'}" class="w-full h-36 object-cover" alt="">
+                        <div class="p-3 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="font-medium text-xs text-brand-dark line-clamp-2">${p.name[currentLang]}</h3>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-[10px] text-gray-500">${p.qty} dona bor</span>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="font-bold text-brand-deep text-xs block">${p.price.toLocaleString()} so'm</span>
+                                <button onclick="addToCart(${p.id})" ${isOutOfStock ? 'disabled' : ''} class="w-full mt-2 ${isOutOfStock ? 'bg-gray-300' : 'bg-brand-pink hover:bg-brand-deep hover:text-white'} text-brand-dark font-bold text-[10px] py-1.5 rounded-lg transition">
+                                    ${isOutOfStock ? 'Xarid qilib bo\'lingan' : '<i class="fa-solid fa-cart-plus"></i> ' + translations[currentLang].nav_cart}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // FILTRLASH
+        function filterCategory(cat) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-deep', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-brand-deep', 'border', 'border-brand-pink/50');
+            });
+            event.currentTarget.classList.remove('bg-white', 'text-brand-deep', 'border', 'border-brand-pink/50');
+            event.currentTarget.classList.add('bg-brand-deep', 'text-white', 'active');
+            renderProducts(cat);
+        }
+
+        // SAVATGA QO'SHISH
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const cartItem = cart.find(item => item.id === id);
+
+            if (product.qty <= 0) {
+                alert(translations[currentLang].out_stock);
+                return;
+            }
+
+            if (cartItem) {
+                if (cartItem.qty < product.qty) {
+                    cartItem.qty++;
+                } else {
+                    alert(translations[currentLang].out_stock);
+                    return;
+                }
+            } else {
+                cart.push({ id: product.id, qty: 1 });
+            }
+
+            if (tg) tg.HapticFeedback.notificationOccurred('success');
+            renderCart();
+        }
+
+        // SAVATNI YANGILASH
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            let count = 0;
+
+            cart.forEach(item => {
+                const prod = products.find(p => p.id === item.id);
+                if (!prod) return;
+                const subtotal = prod.price * item.qty;
+                total += subtotal;
+                count += item.qty;
+
+                cartItemsContainer.innerHTML += `
+                    <div class="flex items-center justify-between bg-white p-3 rounded-xl shadow-sm border border-brand-pink/20">
+                        <div class="flex items-center gap-3">
+                            <img src="${prod.img}" class="w-12 h-12 object-cover rounded-lg" alt="">
+                            <div>
+                                <h4 class="text-xs font-semibold text-brand-dark">${prod.name[currentLang]}</h4>
+                                <span class="text-[11px] text-brand-deep font-medium">${prod.price.toLocaleString()} so'm</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 bg-brand-light border rounded-md flex items-center justify-center text-xs font-bold text-brand-deep">-</button>
+                            <span class="text-xs font-bold px-1">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 bg-brand-light border rounded-md flex items-center justify-center text-xs font-bold text-brand-deep">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cart-total-price').innerText = total.toLocaleString() + ' so\'m';
+            document.getElementById('cart-summary-total').innerText = total.toLocaleString() + ' so\'m';
+            document.getElementById('cart-count').innerText = count;
+            document.getElementById('nav-cart-count').innerText = count;
+        }
+
+        function updateCartQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            const prod = products.find(p => p.id === id);
+            if (!item) return;
+
+            item.qty += change;
+            if (item.qty > prod.qty) {
+                alert(translations[currentLang].out_stock);
+                item.qty = prod.qty;
+            }
+
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            renderCart();
+        }
+
+        function openCart() {
+            switchView('cart');
+        }
+
+        // TELEGRAM ORQALI BUYURTMA BERISH
+        function checkoutOrder() {
+            if (cart.length === 0) return;
+
+            let total = 0;
+            let textMessage = `🌸 *Laylo Kids — Yangi Buyurtma* 🌸\n\n`;
+
+            cart.forEach((item, index) => {
+                const prod = products.find(p => p.id === item.id);
+                const subtotal = prod.price * item.qty;
+                total += subtotal;
+                textMessage += `${index + 1}. *${prod.name[currentLang]}* \n   ${item.qty} dona x ${prod.price.toLocaleString()} = *${subtotal.toLocaleString()} so'm*\n`;
+                
+                // Omborxona qoldig'ini kamaytirish
+                prod.qty -= item.qty;
+            });
+
+            textMessage += `\n💵 *Jami summa:* ${total.toLocaleString()} so'm`;
+
+            // Statistikani yangilash
+            stats.totalSales += total;
+            stats.totalOrders += 1;
+            stats.orderHistory.unshift({
+                id: stats.totalOrders,
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+                total: total,
+                itemsCount: cart.length
+            });
+
+            // Saqlash
+            saveData();
+            renderProducts();
+            renderWarehouse();
+            renderStats();
+
+            // Savatni tozalash
+            cart = [];
+            renderCart();
+
+            // Telegramga yuborish
+            if (tg) {
+                tg.sendData(textMessage);
+                tg.close();
+            } else {
+                alert("Buyurtma muvaffaqiyatli qabul qilindi! (Brauzerdan foydalanayotganingiz uchun Telegram xabari simulyatsiya qilindi)\n\n" + textMessage);
+            }
+        }
+
+        // OMBORXONA — MAHSULOT QO'SHISH
+        function addNewProduct() {
+            const nameUz = document.getElementById('prod-name-uz').value;
+            const nameRu = document.getElementById('prod-name-ru').value;
+            const nameEn = document.getElementById('prod-name-en').value;
+            const price = parseFloat(document.getElementById('prod-price').value);
+            const qty = parseInt(document.getElementById('prod-qty').value);
+            const category = document.getElementById('prod-category').value;
+            let img = document.getElementById('prod-img').value;
+
+            if (!nameUz || !nameRu || !nameEn || isNaN(price) || isNaN(qty)) {
+                alert("Iltimos barcha maydonlarni to'g'ri to'ldiring!");
+                return;
+            }
+
+            if (!img) img = "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300";
+
+            const newProd = {
+                id: Date.now(),
+                name: { uz: nameUz, ru: nameRu, en: nameEn },
+                price: price,
+                qty: qty,
+                category: category,
+                img: img
+            };
+
+            products.push(newProd);
+            saveData();
+            renderProducts();
+            renderWarehouse();
+            renderStats();
+
+            // Tozalash
+            document.getElementById('prod-name-uz').value = '';
+            document.getElementById('prod-name-ru').value = '';
+            document.getElementById('prod-name-en').value = '';
+            document.getElementById('prod-price').value = '';
+            document.getElementById('prod-qty').value = '';
+            document.getElementById('prod-img').value = '';
+
+            alert("Mahsulot muvaffaqiyatli qo'shildi!");
+        }
+
+        // OMBORXONA RO'YXATI
+        function renderWarehouse() {
+            const adminList = document.getElementById('admin-product-list');
+            adminList.innerHTML = '';
+
+            products.forEach(p => {
+                adminList.innerHTML += `
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-brand-pink/20 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <img src="${p.img}" class="w-10 h-10 object-cover rounded-lg" alt="">
+                            <div>
+                                <h4 class="text-xs font-semibold text-brand-dark">${p.name[currentLang]}</h4>
+                                <span class="text-[10px] text-gray-500">${p.price.toLocaleString()} so'm | <b class="text-brand-deep">${p.qty} ta qoldi</b></span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="editQty(${p.id}, 5)" class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">+5</button>
+                            <button onclick="deleteProduct(${p.id})" class="bg-red-100 text-red-600 p-1.5 rounded hover:bg-red-200 transition">
+                                <i class="fa-solid fa-trash-can text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function editQty(id, amount) {
+            const p = products.find(prod => prod.id === id);
+            if (p) {
+                p.qty += amount;
+                saveData();
+                renderProducts();
+                renderWarehouse();
+                renderStats();
+            }
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Ushbu mahsulotni o'chirishni istaysizmi?")) {
+                products = products.filter(p => p.id !== id);
+                saveData();
+                renderProducts();
+                renderWarehouse();
+                renderStats();
+            }
+        }
+
+        // STATISTIKANI CHIQARISH
+        function renderStats() {
+            document.getElementById('stat-total-sales').innerText = stats.totalSales.toLocaleString() + ' so\'m';
+            document.getElementById('stat-total-orders').innerText = stats.totalOrders + ' ta';
+
+            let warehouseValue = products.reduce((acc, p) => acc + (p.price * p.qty), 0);
+            document.getElementById('stat-warehouse-value').innerText = warehouseValue.toLocaleString() + ' so\'m';
+
+            const log = document.getElementById('order-history-list');
+            log.innerHTML = '';
+
+            if (stats.orderHistory.length === 0) {
+                log.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Hozircha buyurtmalar yo'q</p>`;
+                return;
+            }
+
+            stats.orderHistory.forEach(item => {
+                log.innerHTML += `
+                    <div class="border-b border-gray-100 pb-2 text-[11px] flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-brand-deep">ID #${item.id}</span> - ${item.date}
+                            <div class="text-gray-500">${item.itemsCount} xil mahsulot sotilgan</div>
+                        </div>
+                        <span class="font-semibold text-emerald-600">+${item.total.toLocaleString()} so'm</span>
+                    </div>
+                `;
+            });
+        }
+
+        // DASTURNI ISHGA TUSHIRISH
+        changeLanguage('uz');
+    </script>
+</body>
+</html>
